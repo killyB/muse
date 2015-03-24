@@ -25,7 +25,9 @@
 @import "bootstrap";
 
 
-
+.title{
+	font-family: "Helvetica Neue", helvetica, sans serif;
+}
 .small_img{
 	width: 350px;
 	height: 250px;
@@ -74,7 +76,8 @@ header {
 	border-bottom: 1px solid #E4E4E4;
 	#logo {
 		float: left;
-		font-size: 1.75rem;
+		font-family: "Helvetica Neue", helvetica, sans serif;
+		font-size: 2rem;
 		a {
 			color: #333233;
 			text-decoration: none;
