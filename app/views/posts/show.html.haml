@@ -1,3 +1,9 @@
+- if @post.image.present?
+	= image_tag @post.image.url(:medium)
+- else
+	= image_tag @post.link, styles: { medium: "700x500#" }
+
+
 %h1= @post.title
 %p= @post.link
 %p= @post.description
