@@ -1,13 +1,22 @@
 - if @post.image.present?
 	= image_tag @post.image.url(:medium)
 - else
-	= image_tag @post.link, styles: { medium: "700x500#" }
+	= image_tag @post.link, class: "style_image medium"
 
 
 %h1= @post.title
 %p= @post.link
 %p= @post.description
 %p= @post.user.name
+
+#comment
+	%h2.comment_count= pluralize(@post.comments.count, "Comment")
+	- @comments.each do |comment|
+		.comment
+			%p.username= comment.user.name
+			%p.content= comment.content
+			
+	= render 'comments/form'
 
 = link_to "Edit", edit_post_path(@post)
 = link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" }

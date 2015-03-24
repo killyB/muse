@@ -2,9 +2,12 @@
 	- if post.image.present?
 		= link_to (image_tag post.image.url(:small)), post
 	- else
-		= link_to (image_tag post.link, class: "style_image"), post
+		= link_to (image_tag post.link, class: "style_image small"), post
 	
 	%h2= link_to post.title, post
+	%p
+		= post.comments.count
+		Comments
 
 = link_to "Add New Inspiration", new_post_path
 = link_to "Sign Up", new_user_registration_path
