@@ -18,4 +18,4 @@
 
 # Ignore application configuration
 /config/application.yml
-/app/helpers/twitter_helper.rb
+/config/local_env.yml
