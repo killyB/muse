@@ -12,6 +12,7 @@
 		.wrapper.clearfix
 			#logo= link_to "Muse", root_path
 			%nav
+				= link_to "Sign in with Twitter", "auth/twitter"
 				- if user_signed_in?
 					= link_to current_user.name, edit_user_registration_path
 					= link_to "Add New Inspiration", new_post_path, class: "btn btn-primary"

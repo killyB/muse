@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
+  
+  get '/auth/:provider/callback', to: 'sessions#create'
+  resource :sessions, :only => :create
+
   resources :posts do
   	member do
   		get "like", to: "posts#upvote"
@@ -9,4 +13,5 @@ Rails.application.routes.draw do
   end
 
   root 'posts#index'
+
 end
