@@ -32,6 +32,16 @@ gem 'masonry-rails', '~> 0.2.4'
 gem 'haml', '~> 4.0.6'
 gem 'simple_form', '~> 3.1.0'
 gem 'spring', '~> 1.3.3'
+gem 'twitter', '~> 5.14.0'
+gem 'figaro'
+
+#OAuth providers
+#gem 'therubyracer', '~> 0.12.1'
+gem 'omniauth'
+gem 'omniauth-digitalocean'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-google'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

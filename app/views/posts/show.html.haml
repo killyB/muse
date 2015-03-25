@@ -49,6 +49,17 @@
 							%span
 								%i.fa.fa-thumbs-o-up
 								= @random_post.get_likes.size
+			.post
+				- client = TwitterHelper.get_client
+				- client.favorites.each do |tweet|
+					%blockquote
+						%p.text= tweet.text
+					.from
+						&mdash;
+						%p.username= tweet.user.screen_name
+					end
+
+
 
 #comments
 	%h2.comment_count= pluralize(@post.comments.count, "Comment")
