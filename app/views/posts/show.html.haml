@@ -54,11 +54,8 @@
 				- client.favorites.each do |tweet|
 					%blockquote
 						%p.text= tweet.text
-					.from
 						&mdash;
-						%p.username= tweet.user.screen_name
-					end
-
+						%p.username= "@" + tweet.user.screen_name
 
 
 #comments
