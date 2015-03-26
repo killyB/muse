@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 	before_action :find_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
-	before_action :authenticate_user!, except: [:index, :show]
+	before_action :twit_authed_user!, except: [:index, :show]
 
 	def index
 		@posts = Post.all.order("created_at DESC")
@@ -12,11 +12,11 @@ class PostsController < ApplicationController
 	end
 
 	def new		
-		@post = current_user.posts.build
+		@post = authed_user.posts.build
 	end
 
 	def create		
-		@post = current_user.posts.build(post_params)
+		@post = authed_user.posts.build(post_params)
 
 		if @post.save
 			redirect_to @post
@@ -42,12 +42,12 @@ class PostsController < ApplicationController
 	end
 
 	def upvote
-		@post.upvote_by current_user
+		@post.upvote_by authed_user
 		redirect_to :back
 	end
 
 	def downvote
-		@post.downvote_by current_user
+		@post.downvote_by authed_user
 		redirect_to :back		
 	end
 

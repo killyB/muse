@@ -12,15 +12,19 @@
 		.wrapper.clearfix
 			#logo= link_to "Muse", root_path
 			%nav
-				= link_to "Sign in with Twitter", "auth/twitter"
-				- if user_signed_in?
-					= link_to current_user.name, edit_user_registration_path
+				- if authed_user
+					= link_to authed_user.name
 					= link_to "Add New Inspiration", new_post_path, class: "btn btn-primary"
-					= link_to "Log Out", destroy_user_session_path, method: :delete, class: "button"
+					= link_to "Log Out", signout_path, method: :delete, class: "button"
 				-else
-					= link_to "Sign In", new_user_session_path
-					= link_to "Join Muse", new_user_registration_path, class: "button"
-	%p.notice= notice
+					= link_to "Sign In with Twitter", '/auth/twitter', class: "button"					
+	- if notice
+		.alert-message.success
+			= link_to "x", root_url, class: "close"
+			= flash.now[:notice]
+	- else
+		%p.notice= alert
+
 	%p.alert= alert
 
 	.wrapper
