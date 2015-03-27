@@ -26,7 +26,7 @@
 				.data.clearfix
 					%p.username
 						Shared By
-						= post.user.name
+						= link_to post.user.name, user_path(post.user.id)
 					%p.buttons
 						%span
 							%i.fa.fa-comments-o
