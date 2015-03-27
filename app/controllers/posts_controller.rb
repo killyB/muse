@@ -9,6 +9,13 @@ class PostsController < ApplicationController
 	def show
 		@comments = Comment.where(post_id: @post)
 		@random_post = Post.where.not(id: @post).order("RANDOM()").first
+		@random_post_last = Post.where.not(id: @post).order("RANDOM()").last
+
+#		until @random_post != @random_post_last do 
+#			@random_post_last = Post.where.not(id: @post).order("RANDOM()").first
+#			
+#		end
+
 	end
 
 	def new		
@@ -25,15 +32,19 @@ class PostsController < ApplicationController
 		end
 	end
 
-	def edit		
+	def edit	
+		if authed_user.id != @post.user_id
+			redirect_to root_path, notice: "You can only edit your own posts." 
+		else
+		end
 	end
 
-	def update
-		if @post.update(post_params)
-			redirect_to @post
-		else
-			render 'edit'
-		end
+	def update		
+			if @post.update(post_params)
+				redirect_to @post
+			else
+				render 'edit'
+			end
 	end
 
 	def destroy	
@@ -58,6 +69,6 @@ class PostsController < ApplicationController
 	end
 
 	def post_params
-		params.require(:post).permit(:title, :link, :description, :image)		
+		params.require(:post).permit(:title, :link, :description, :image, :user_id)		
 	end
 end

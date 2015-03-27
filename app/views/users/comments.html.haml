@@ -1,0 +1,6 @@
+#comments
+	%h2.comment_count= pluralize(@post.comments.count, "Comment")
+	- @comments.each do |comment|
+		.comment
+			%p.username= link_to comment.user.name, comment.user.twitterURL
+			%p.content= comment.content

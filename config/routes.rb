@@ -5,7 +5,13 @@ Rails.application.routes.draw do
   match "signout", to: 'authentications#destroy', as: 'signout', via: :delete
   
   
-  # devise_for :users
+  devise_for :users
+  resources :users do
+    member do
+      get :posts
+      get :comments
+    end
+  end
   
  
   resources :posts do

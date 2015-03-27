@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :authentications
-
+  has_many :posts_with_comments, :through => :comments, :source => :post
   has_many :posts
   has_many :comments
 
@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
       user.name = auth[:info][:nickname]
       user.email = auth[:info][:email] 
       user.password = "password1"
+      user.twitterURL = auth[:info][:url]
       user.save
     end
   end

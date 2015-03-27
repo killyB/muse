@@ -13,7 +13,7 @@
 			#logo= link_to "Muse", root_path
 			%nav
 				- if authed_user
-					= link_to authed_user.name
+					= link_to authed_user.name, user_path(session[:user_id])
 					= link_to "Add New Inspiration", new_post_path, class: "btn btn-primary"
 					= link_to "Log Out", signout_path, method: :delete, class: "button"
 				-else

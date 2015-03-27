@@ -24,11 +24,11 @@
 			%p.data
 				%i.fa.fa-comments-o
 				= pluralize(@post.comments.count, "Comment")
-			- if @post.user == current_user
+			- if @post.user == authed_user
 				= link_to "Edit", edit_post_path(@post), class: "data"
 				= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?"}, class: "data"
 		#random_post
-			%h3 Random Inspiration
+			%h2 Random Inspiration
 			.post
 				.post_image
 					- if @random_post.image.present?
@@ -49,20 +49,46 @@
 							%span
 								%i.fa.fa-thumbs-o-up
 								= @random_post.get_likes.size
-			.post
-				- client = TwitterHelper.get_client
-				- client.favorites.each do |tweet|
-					%blockquote
-						%p.text= tweet.text
-						&mdash;
-						%p.username= "@" + tweet.user.screen_name
+			%br/
+			.post	
+				.post_image
+					- if @random_post_last.image.present?
+						= link_to (image_tag @random_post_last.image.url(:small)), post_path(@random_post_last)
+					- else
+						= link_to (image_tag @random_post_last.link, class: "small_img"), post_path(@random_post_last)
+				.post_content
+					.title
+						%h2= link_to @random_post_last.title, post_path(@random_post_last)
+					.data.clearfix
+						%p.username
+							Shared by
+							= @random_post_last.user.name
+						%p.buttons
+							%span
+								%i.fa.fa-comments-o
+								= @random_post_last.comments.count
+							%span
+								%i.fa.fa-thumbs-o-up
+								= @random_post_last.get_likes.size
+
+
+-#			.post
+-#				- client = TwitterHelper.get_client
+-#				.post_content
+-#					.title
+-#						%h1= link_to "Your Twitter Favorites", authed_user.twitterURL	
+-#				- client.favorites.each do |tweet|
+-#					%blockquote
+-#						%p.text= tweet.text
+-#						&mdash;
+-#						%p.username= "@" + tweet.user.screen_name
 
 
 #comments
 	%h2.comment_count= pluralize(@post.comments.count, "Comment")
 	- @comments.each do |comment|
 		.comment
-			%p.username= comment.user.name
+			%p.username= link_to comment.user.name, comment.user.twitterURL
 			%p.content= comment.content
 			
 	= render 'comments/form'
